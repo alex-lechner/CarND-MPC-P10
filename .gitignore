@@ -1,0 +1,8 @@
+.vscode
+build
+tags
+.editorconfig
+.DS_Store
+.idea
+Ipopt-3.12.7
+src/Eigen-3.3
