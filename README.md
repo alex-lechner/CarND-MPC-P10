@@ -71,7 +71,7 @@ The model is based on the following equations to predict the `x`, `y`, `psi`, `v
 
 ![model equations][equations]
 
-The 100 millisecond latency is initialized as a constant `dt = 0.1` in line 111 in `main.cpp`.
+The 100 millisecond latency is initialized as a constant `dt = 0.1` on line 111 in `main.cpp`.
 
 ### 4. Discussion about the chosen *N* and *dt* values
 At first, values of `N = 20` and `dt = 0.05` were chosen. Those (high) initial values had a negative impact on the vehicle's steering because the car nearly left the road. After fine-tuning these parameters, the final values are now `N = 12` and `dt = 0.04` which keep the vehicle very close to the center of the road and therefore ensure the vehicle drives around the track safely. A high `dt` value also had the effect that the car was in an acceleration-brake-loop and did not maintain a constant velocity.
