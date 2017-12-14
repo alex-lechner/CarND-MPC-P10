@@ -68,6 +68,7 @@ Connected
 
 ### 3. Description of the model
 The model is based on the following equations to predict the `x`, `y`, `psi`, `v`, `cte` (cross-track error) & `epsi` (heading error) values:
+
 ![model equations][equations]
 
 The 100 millisecond latency is initialized as a constant `dt = 0.1` in line 111 in `main.cpp`.
