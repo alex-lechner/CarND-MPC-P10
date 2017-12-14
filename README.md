@@ -1,108 +1,89 @@
-# CarND-Controls-MPC
-Self-Driving Car Engineer Nanodegree Program
+# MPC
+---
+
+**Model Predictive Control Project**
+
+The goals / steps of this project are the following:
+
+* Description of the model
+* Discussion about the chosen *N* (timestep length) and *dt* (elapsed duration between timesteps) values
+* Polynomial is fitted to waypoints
+* 100-millisecond latency is implemented
+* The vehicle must successfully drive a lap around the track
+
+[//]: # (References)
+[simulator]: https://github.com/udacity/self-driving-car-sim/releases
+[win 10 update]: https://support.microsoft.com/de-de/help/4028685/windows-get-the-windows-10-creators-update
+[uWebSocketIO]: https://github.com/uWebSockets/uWebSockets
+[linux on win 10]: https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/
+[MinGW]: http://www.mingw.org/
+[CMake]: https://cmake.org/install/
+[ipopt and cppad]: https://github.com/udacity/CarND-MPC-Project/blob/master/install_Ipopt_CppAD.md
+[eigen lib]: http://eigen.tuxfamily.org/index.php?title=Main_Page
+[udacity code]: https://github.com/udacity/CarND-MPC-Project
+[data md]: ./DATA.md
+[equations]: ./imgs/mpc-equations.jpg "Model Equations"
+[output video]: ./imgs/mpc.gif "MPC Project Video"
 
 ---
 
-## Dependencies
+## Files Submitted & Code Quality
 
-* cmake >= 3.5
- * All OSes: [click here for installation instructions](https://cmake.org/install/)
-* make >= 4.1(mac, linux), 3.81(Windows)
-  * Linux: make is installed by default on most Linux distros
-  * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
-  * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
-* gcc/g++ >= 5.4
-  * Linux: gcc / g++ is installed by default on most Linux distros
-  * Mac: same deal as make - [install Xcode command line tools]((https://developer.apple.com/xcode/features/)
-  * Windows: recommend using [MinGW](http://www.mingw.org/)
-* [uWebSockets](https://github.com/uWebSockets/uWebSockets)
-  * Run either `install-mac.sh` or `install-ubuntu.sh`.
-  * If you install from source, checkout to commit `e94b6e1`, i.e.
-    ```
-    git clone https://github.com/uWebSockets/uWebSockets
-    cd uWebSockets
-    git checkout e94b6e1
-    ```
-    Some function signatures have changed in v0.14.x. See [this PR](https://github.com/udacity/CarND-MPC-Project/pull/3) for more details.
+### 1. Submission includes all required files and every TODO task has been accomplished 
 
-* **Ipopt and CppAD:** Please refer to [this document](https://github.com/udacity/CarND-MPC-Project/blob/master/install_Ipopt_CppAD.md) for installation instructions.
-* [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page). This is already part of the repo so you shouldn't have to worry about it.
-* Simulator. You can download these from the [releases tab](https://github.com/udacity/self-driving-car-sim/releases).
-* Not a dependency but read the [DATA.md](./DATA.md) for a description of the data sent back from the simulator.
+For this project, I have used the [MPC Project Starter Code][udacity code] from Udacity and I have modified the following three files:
+```cpp
+main.cpp
+MPC.cpp
+MPC.h
+```
 
+### 2. Code must compile without errors
 
-## Basic Build Instructions
+This project was done on Windows 10. In order to set up this project I had to:
+* update my Windows 10 Version with the [Windows 10 Creators Update][win 10 update]
+* install the [Linux Bash Shell][linux on win 10] (with Ubuntu 16.04) for Windows 10
+* set up and install [uWebSocketIO][uWebSocketIO] through the Linux Bash Shell for Windows 10
+* [download the simulator from Udacity][simulator]
+* [install Ipopt and CppAD][ipopt and cppad]
+* [download the Eigen library][eigen lib]  which is already part of the repo in the `src` folder
 
-1. Clone this repo.
-2. Make a build directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
-4. Run it: `./mpc`.
+For a description of the sent back data from the simulator, please refer to the [DATA.md][data md] file.
+**To update the Linux Bash Shell to Ubuntu 16.04 the Windows 10 Creators Update has to be installed!**
 
-## Tips
+Also, [CMake][CMake] and a gcc/g++ compiler like [MinGW][MinGW] is required in order to compile and build the project.
 
-1. It's recommended to test the MPC on basic examples to see if your implementation behaves as desired. One possible example
-is the vehicle starting offset of a straight line (reference). If the MPC implementation is correct, after some number of timesteps
-(not too many) it should find and track the reference line.
-2. The `lake_track_waypoints.csv` file has the waypoints of the lake track. You could use this to fit polynomials and points and see of how well your model tracks curve. NOTE: This file might be not completely in sync with the simulator so your solution should NOT depend on it.
-3. For visualization this C++ [matplotlib wrapper](https://github.com/lava/matplotlib-cpp) could be helpful.)
-4.  Tips for setting up your environment are available [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
-5. **VM Latency:** Some students have reported differences in behavior using VM's ostensibly a result of latency.  Please let us know if issues arise as a result of a VM environment.
+Once the install for uWebSocketIO is complete, the main program can be built and run by doing the following from the project top directory in the Linux Bash Shell.
 
-## Editor Settings
+1. `mkdir build`
+2. `cd build`
+3. `cmake .. -G "Unix Makefiles" && make` on Windows 10 or `cmake .. && make` on Linux or Mac
+4. `./mpc`
 
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
+Then the simulator has to be started and *Project 5: MPC Controller* has to be selected. When everything is set up the Linux Bash Shell should print: 
+```bash 
+Listening to Port 4567
+Connected
+```
 
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
+### 3. Description of the model
+The model is based on the following equations to predict the `x`, `y`, `psi`, `v`, `cte` (cross-track error) & `epsi` (heading error) values:
+![model equations][equations]
 
-## Code Style
+The 100 millisecond latency is initialized as a constant `dt = 0.1` in line 111 in `main.cpp`.
 
-Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
+### 4. Discussion about the chosen *N* and *dt* values
+At first, values of `N = 20` and `dt = 0.05` were chosen. Those (high) initial values had a negative impact on the vehicle's steering because the car nearly left the road. After fine-tuning these parameters, the final values are now `N = 12` and `dt = 0.04` which keep the vehicle very close to the center of the road and therefore ensure the vehicle drives around the track safely. A high `dt` value also had the effect that the car was in an acceleration-brake-loop and did not maintain a constant velocity.
 
-## Project Instructions and Rubric
+### 5. Final Output:
 
-Note: regardless of the changes you make, your project must be buildable using
-cmake and make!
+![final output][output video]
 
-More information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/f1820894-8322-4bb3-81aa-b26b3c6dcbaf/lessons/b1ff3be0-c904-438e-aad3-2b5379f0e0c3/concepts/1a2255a0-e23c-44cf-8d41-39b8a3c8264a)
-for instructions and the project rubric.
+Note: This gif is accelerated and does not match the actual speed during this recording.
 
-## Hints!
+---
 
-* You don't have to follow this directory structure, but if you do, your work
-  will span all of the .cpp files here. Keep an eye out for TODOs.
+## Discussion
 
-## Call for IDE Profiles Pull Requests
-
-Help your fellow students!
-
-We decided to create Makefiles with cmake to keep this project as platform
-agnostic as possible. Similarly, we omitted IDE profiles in order to we ensure
-that students don't feel pressured to use one IDE or another.
-
-However! I'd love to help people get up and running with their IDEs of choice.
-If you've created a profile for an IDE that you think other students would
-appreciate, we'd love to have you add the requisite profile files and
-instructions to ide_profiles/. For example if you wanted to add a VS Code
-profile, you'd add:
-
-* /ide_profiles/vscode/.vscode
-* /ide_profiles/vscode/README.md
-
-The README should explain what the profile does, how to take advantage of it,
-and how to install it.
-
-Frankly, I've never been involved in a project with multiple IDE profiles
-before. I believe the best way to handle this would be to keep them out of the
-repo root to avoid clutter. My expectation is that most profiles will include
-instructions to copy files to a new location to get picked up by the IDE, but
-that's just a guess.
-
-One last note here: regardless of the IDE used, every submitted project must
-still be compilable with cmake and make./
-
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+### 1. Briefly discuss any problems / issues you faced in your implementation of this project.
+Every time I started the simulator and ran the code, the vehicle instantly steered 25 degrees to the right for a few seconds and then to the left. This kept repeating the whole time. The problem was that my steering value (line 119 in `main.cpp`) already had a value between -1 and 1 so there was no necessity to divide the steering value by the `deg2rad()` function on line 18 in `main.cpp`.
