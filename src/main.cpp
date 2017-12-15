@@ -109,11 +109,15 @@ int main() {
 
                     auto coeffs = polyfit(ptsx_trans, ptsy_trans, 3);
                     const double Lf = 2.67, dt = 0.1;
-                    double cte = polyeval(coeffs, 0), epsi = -atan(coeffs[1]);
+                    double cte = polyeval(coeffs, 0), epsi = -atan(coeffs[1]), pred_v, pred_cte, pred_epsi;
 
                     px = v * dt;
                     psi = -(v / Lf) * steer_value * dt;
-                    state << px, 0, psi, v, cte, epsi;
+                    pred_v = v + throttle_value * dt;
+                    pred_cte = cte + v * sin(epsi) * dt;
+                    pred_epsi = epsi - (v/Lf) * steer_value * dt;
+
+                    state << px, 0, psi, pred_v, pred_cte, pred_epsi;
 
                     auto vars = mpc.Solve(state, coeffs);
                     steer_value = -vars[0];
